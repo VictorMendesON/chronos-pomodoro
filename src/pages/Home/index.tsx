@@ -1,17 +1,23 @@
 import { Container } from '../../components/Container';
+import { CountDown } from '../../components/CountDown';
+import { MainForm } from '../../components/MainForm';
+import type { TaskStateModel } from '../../Models/TaskStateModel';
 import { MainTemplate } from '../../templates/MainTemplate';
 
-export function NotFound() {
+type HomeProps = {
+  state: TaskStateModel;
+  setState: React.Dispatch<React.SetStateAction<TaskStateModel>>;
+};
+
+export function Home(props: HomeProps) {
   return (
     <MainTemplate>
       <Container>
-        <h1>Página não encontrada</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque iusto
-          numquam similique. Voluptas commodi tempora eum, nulla doloribus ab
-          adipisci vel quaerat maiores ullam molestiae unde non quidem rem
-          distinctio.
-        </p>
+        <CountDown />
+      </Container>
+
+      <Container>
+        <MainForm />
       </Container>
     </MainTemplate>
   );
