@@ -6,19 +6,18 @@ export const taskActionTypes = {
   RESET_STATE: 'RESET_STATE',
 } as const;
 
-export type TaskActionsWithPayload =
+export type TaskActionsWithPayload = {
+  type: typeof taskActionTypes.START_TASK;
+  payload: taskModel;
+};
+
+export type TaskActionsWithoutPayload =
   | {
-      type: typeof taskActionTypes.START_TASK;
-      payload: taskModel;
+      type: typeof taskActionTypes.RESET_STATE;
     }
   | {
       type: typeof taskActionTypes.INTERRUPT_TASK;
-      payload: taskModel;
     };
-
-export type TaskActionsWithoutPayload = {
-  type: typeof taskActionTypes.RESET_STATE;
-};
 
 export type taskActionModel =
   | TaskActionsWithPayload
