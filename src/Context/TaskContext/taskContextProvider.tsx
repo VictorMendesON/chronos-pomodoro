@@ -3,6 +3,7 @@ import { TaskContext } from './taskContext';
 import { initialTaskState } from './initialTaskState';
 import { taskReducer } from './taskReducer';
 import { timerWorkerManager } from '../../workers/timerWorkerManager';
+import { taskActionTypes } from './taskActions';
 
 type TaskContextProviderProps = {
   children: React.ReactNode;
@@ -10,21 +11,42 @@ type TaskContextProviderProps = {
 
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
   const [state, dispatch] = useReducer(taskReducer, initialTaskState);
-
-  const worker = timerWorkerManager.getInstance();
-
-  worker.onmessage(e => {
-    console.log(e.data);
-  });
+  const activeTask = state.activeTask;
 
   useEffect(() => {
-    if (!state.activeTask) {
-      console.log('Worker terminado por falta de activeTask');
-      worker.terminate();
-    }
+    if (!activeTask) return;
 
-    worker.postMessage(state);
-  }, [worker, state]);
+    const worker = timerWorkerManager.getInstance();
+
+    worker.onmessage(e => {
+      const countDownSeconds = e.data;
+      console.log('Worker enviou:', countDownSeconds);
+
+      if (countDownSeconds <= 0) {
+        dispatch({ type: taskActionTypes.COMPLETE_TASK });
+      } else {
+        dispatch({
+          type: taskActionTypes.COUNT_DOWN,
+          payload: { secondsRemaining: countDownSeconds },
+        });
+      }
+    });
+
+    worker.postMessage({
+      activeTask,
+      secondsRemaining: activeTask.duration * 60,
+      tasks: [],
+      formattedSecondsRemaining: '',
+      currentCycle: 0,
+      config: {
+        workTime: 0,
+        shortBreakTime: 0,
+        longBreakTime: 0,
+      },
+    });
+
+    return () => worker.terminate();
+  }, [activeTask, dispatch]);
 
   return (
     <TaskContext.Provider value={{ state, dispatch }}>
