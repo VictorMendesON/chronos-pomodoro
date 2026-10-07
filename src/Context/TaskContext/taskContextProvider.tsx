@@ -54,6 +54,14 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
   }, [activeTask, dispatch]);
 
   useEffect(() => {
+    const taskName = state.activeTask?.name;
+
+    document.title = taskName
+      ? `${state.formattedSecondsRemaining} - ${taskName} | Chronos Pomodoro`
+      : 'Chronos Pomodoro';
+  }, [state.formattedSecondsRemaining, state.activeTask?.name]);
+
+  useEffect(() => {
     if (state.activeTask && playBeepRef.current === null) {
       playBeepRef.current = loadBeep();
     } else {
