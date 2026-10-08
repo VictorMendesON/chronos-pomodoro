@@ -13,13 +13,44 @@ export function History() {
         <Heading>
           <span>History</span>
           <span className={styles.buttonContainer}>
-            <DefaultButton icon={<TrashIcon />} color='red' />
+            <DefaultButton
+              icon={<TrashIcon />}
+              color='red'
+              aria-label='Apagar todo o histórico'
+              title='Apagar histórico'
+            />
           </span>
         </Heading>
       </Container>
 
       <Container>
-        <div className='responsiveTable'>erferferf</div>
+        <div className={styles.responsiveTable}>
+          <table>
+            <thead>
+              <tr>
+                <th>Tarefa</th>
+                <th>Duração</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Tipo</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {Array.from({ length: 20 }).map((_, index) => {
+                return (
+                  <tr key={index}>
+                    <td>Estudar</td>
+                    <td>25Min</td>
+                    <td>20/04/2026 08:00</td>
+                    <td>Completas</td>
+                    <td>Foco</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </Container>
     </MainTemplate>
   );
