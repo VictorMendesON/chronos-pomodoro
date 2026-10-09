@@ -13,7 +13,7 @@ type TaskContextProviderProps = {
 
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
   const [state, dispatch] = useReducer(taskReducer, initialTaskState, () => {
-    const storageState = localStorage.getItem('state') || null;
+    const storageState = localStorage.getItem('taskState') || null;
 
     if (storageState === null) {
       return initialTaskState;

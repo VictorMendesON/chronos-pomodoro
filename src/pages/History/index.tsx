@@ -9,8 +9,9 @@ import { useTaskContext } from '../../Context/TaskContext/useTaskContext';
 import { formatDate } from '../../utils/formatDate';
 import { getTaskStatus } from '../../utils/getTaskStatus';
 import { sortTasks, type SortTasksOptions } from '../../utils/sortTasks';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { taskActionTypes } from '../../Context/TaskContext/taskActions';
+import { showMessage } from '../../adapters/showMessage';
 
 export function History() {
   const { state, dispatch } = useTaskContext();
@@ -28,6 +29,16 @@ export function History() {
     field: sortTasksOptions.field,
   });
 
+  useEffect(() => {
+    document.title = 'Histórico - Chronos Pomodoro';
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      showMessage.dismiss();
+    };
+  }, []);
+
   function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
     setSortTasksOptions(prevState => {
       const newDirection = prevState.direction === 'desc' ? 'asc' : 'desc';
@@ -39,9 +50,12 @@ export function History() {
   }
 
   function handleDeleteAllHistory() {
-    if (!confirm('Tem certeza que deseja apagar todo o histórico?')) return;
-
-    dispatch({ type: taskActionTypes.RESET_STATE });
+    showMessage.dismiss();
+    showMessage.confirm('Tem certeza?', confirmation => {
+      console.log('confirmation:', confirmation);
+      if (!confirmation) return;
+      dispatch({ type: taskActionTypes.RESET_STATE });
+    });
   }
 
   return (
