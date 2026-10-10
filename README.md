@@ -1,85 +1,112 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and
-some ESLint rules.
+# ⏱️ Chronos Pomodoro
 
-Currently, two official plugins are available:
+**Gerenciador de tempo baseado na técnica Pomodoro, com histórico de tarefas e alerta sonoro.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react)
-  uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc)
-  uses [SWC](https://swc.rs/)
+[![Deploy](https://img.shields.io/badge/demo-online-10b981?style=for-the-badge&logo=vercel&logoColor=white)](https://chronos-victor.vercel.app)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-## React Compiler
+[**🔗 Ver projeto online**](https://chronos-victor.vercel.app)
 
-The React Compiler is enabled on this template. See
-[this documentation](https://react.dev/learn/react-compiler) for more
-information.
+</div>
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## 🖼️ Telas
 
-If you are developing a production application, we recommend updating the
-configuration to enable type-aware lint rules:
+| Home | Histórico | Configurações |
+| --- | --- | --- |
+| <img src="./docs/home.png" width="300" alt="Tela principal do Chronos com o timer e o campo de tarefa"> | <img src="./docs/history.png" width="300" alt="Histórico de tarefas com tarefa, duração, data, status e tipo"> | <img src="./docs/settings.png" width="300" alt="Configurações de tempo de foco, descanso curto e descanso longo"> |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📖 Sobre o projeto
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+O **Chronos** é um app de produtividade que aplica a técnica Pomodoro: você define uma tarefa, trabalha em ciclos de foco e alterna com pausas curtas e longas. Cada tarefa fica registrada em um histórico, que pode ser consultado e ordenado.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+O projeto foi construído para praticar conceitos de React com TypeScript em uma aplicação completa, com gerenciamento de estado global, múltiplas páginas, Web Worker e deploy em produção.
+
+## ✨ Funcionalidades
+
+- ⏲️ **Timer Pomodoro** com contagem regressiva em tempo real
+- 🔁 **Ciclos automáticos** de foco, pausa curta e pausa longa
+- 📝 **Cadastro de tarefas** a cada ciclo de foco
+- 🔔 **Alerta sonoro** ao final de cada ciclo
+- 📜 **Histórico de tarefas** com nome, duração, data, status (ex.: interrompida) e tipo de ciclo, ordenável por tarefa, duração e data
+- 🗑️ **Limpeza do histórico** com confirmação por toast
+- ⚙️ **Configurações de tempo** para foco, descanso curto e descanso longo, salvas automaticamente
+- 🌗 **Botão de tema** no menu de navegação
+- 🧵 **Web Worker** para manter a contagem precisa em segundo plano
+
+## 🛠️ Tecnologias
+
+| Categoria | Ferramentas |
+| --- | --- |
+| Interface | React, TypeScript |
+| Build | Vite |
+| Estilização | CSS Modules, variáveis CSS |
+| Estado global | Context API + `useReducer` |
+| Contagem do tempo | Web Worker |
+| Deploy | Vercel |
+
+## 🚀 Como rodar localmente
+
+**Pré-requisitos:** [Node.js](https://nodejs.org/) 22 ou superior e npm.
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/VictorMendesON/chronos-pomodoro.git
+
+# 2. Entre na pasta
+cd chronos-pomodoro
+
+# 3. Instale as dependências
+npm install
+
+# 4. Inicie o servidor de desenvolvimento
+npm run dev
 ```
 
-You can also install
-[eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x)
-and
-[eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom)
-for React-specific lint rules:
+Depois, abra o endereço que aparecer no terminal (normalmente `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+### Scripts disponíveis
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+| Comando | O que faz |
+| --- | --- |
+| `npm run dev` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Verifica os tipos com `tsc` e gera a versão de produção em `dist/` |
+| `npm run preview` | Serve localmente a versão de produção |
+
+## 🗂️ Estrutura do projeto
+
+```text
+src/
+├── components/   # Componentes reutilizáveis (Container, CountDown, Menu, Dialog...)
+├── Context/      # Estado global das tarefas (contexto, reducer e actions)
+├── Models/       # Tipos e modelos do TypeScript
+├── pages/        # Páginas (Home, History, Settings...)
+├── routers/      # Rotas da aplicação
+├── styles/       # Estilos globais e tema
+├── utils/        # Funções auxiliares (próximo ciclo, status e ordenação de tarefas)
+└── workers/      # Web Worker do cronômetro
 ```
+
+## 💡 Aprendizados
+
+- **Gerenciamento de estado com `useReducer` + Context API**, separando actions, reducer e provider.
+- **Web Workers** para o cronômetro não depender do ritmo da aba principal.
+- **Tipagem com TypeScript** em estado, ações e modelos de dados.
+- **Deploy contínuo na Vercel:** cada push na `main` publica uma nova versão.
+- **Diferença entre Windows e Linux nos nomes de arquivo:** o Windows ignora maiúsculas e minúsculas, mas a Vercel (Linux) não. Um `import` apontando para `styles.module.css` quebra o build se o arquivo no Git for `Styles.module.css`. A solução foi renomear com `git mv` e testar o build em um clone limpo do repositório.
+
+## 👨‍💻 Autor
+
+**Victor Mendes**
+Desenvolvedor Front-End
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VictorMendesON)
+<!-- Adicione aqui seu LinkedIn e portfólio:
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](SEU_LINK)
+[![Portfólio](https://img.shields.io/badge/Portf%C3%B3lio-10b981?style=for-the-badge)](SEU_LINK)
+-->
