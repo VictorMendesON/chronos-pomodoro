@@ -17,9 +17,21 @@
 
 ## 🖼️ Telas
 
-| Home | Histórico | Configurações |
-| --- | --- | --- |
-| <img src="./docs/home.png" width="300" alt="Tela principal do Chronos com o timer e o campo de tarefa"> | <img src="./docs/history.png" width="300" alt="Histórico de tarefas com tarefa, duração, data, status e tipo"> | <img src="./docs/settings.png" width="300" alt="Configurações de tempo de foco, descanso curto e descanso longo"> |
+<div align="center">
+
+### Home
+
+<img src="./docs/home.png" width="800" alt="Tela principal do Chronos com o timer e o campo de tarefa">
+
+### Histórico
+
+<img src="./docs/history.png" width="800" alt="Histórico de tarefas com tarefa, duração, data, status e tipo">
+
+### Configurações
+
+<img src="./docs/settings.png" width="800" alt="Configurações de tempo de foco, descanso curto e descanso longo">
+
+</div>
 
 ## 📖 Sobre o projeto
 
